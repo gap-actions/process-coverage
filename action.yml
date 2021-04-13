@@ -1,11 +1,11 @@
-name: 'Run tests and upload coverage'
-description: 'Run tests and upload coverage'
+name: 'Gather and upload coverage data'
+description: 'Gather and upload coverage data'
 runs:
   using: "composite"
   steps:
-      - name: "Gather coverage"
+      - name: "Gather coverage data"
         run:  pkg-ci-scripts/gather-coverage.sh
         shell: bash
-      - name: "Upload coverage data to codecov"
+      - name: "Upload coverage data to Codecov"
         run:  bash <(curl -s https://codecov.io/bash)
         shell: bash
