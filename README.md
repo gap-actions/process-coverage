@@ -7,7 +7,7 @@ This GitHub action uploads coverage data for GAP packages to codecov.
 The action `process-coverage` has to be called by the workflow of a GAP
 package.
 By default it processes the coverage data gathered during the action
-[gap-actions/run-test-for-packages](https://github.com/gap-actions/run-test-for-packages).
+[gap-actions/run-test-for-packages](https://github.com/gap-actions/run-pkg-tests).
 
 ### Example
 
