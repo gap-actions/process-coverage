@@ -4,5 +4,35 @@ runs:
   using: "composite"
   steps:
       - name: "Process coverage data"
-        run:  pkg-ci-scripts/gather-coverage.sh
+        run: |
+         set -ex
+         GAPROOT=${GAPROOT-$HOME/gap}
+
+         # start GAP with custom GAP root, to ensure correct package version is loaded
+         GAP="$GAPROOT/bin/gap.sh -l $PWD/gaproot; --quitonbreak -q"
+
+         # generate library coverage reports
+         $GAP -q <<GAPInput
+         if LoadPackage("profiling") <> true then
+             Print("ERROR: could not load profiling package");
+             FORCE_QUIT_GAP(1);
+         fi;
+         d := Directory("${COVDIR-coverage}");;
+         covs := [];;
+         for f in DirectoryContents(d) do
+             if f in [".", ".."] then continue; fi;
+             Add(covs, Filename(d, f));
+         od;
+         Print("Merging coverage results from ", covs, "\n");
+         r := MergeLineByLineProfiles(covs);;
+         # filtered out unwanted other packages to avoid bad coverage interaction
+         r.line_info := Filtered(r.line_info, x -> not StartsWith( x[1], "$GAPROOT/" ) );;
+         Print("Outputting JSON\n");
+         OutputJsonCoverage(r, "gap-coverage.json");;
+         QUIT_GAP(0);
+         GAPInput
+
+         # generate source coverage reports by running gcov
+         gcov -o . $(git ls-files :*.c :*.cc :*.cpp :*.C) || :
+
         shell: bash
