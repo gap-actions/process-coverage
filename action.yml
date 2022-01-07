@@ -33,6 +33,6 @@ runs:
          GAPInput
 
          # generate source coverage reports by running gcov
-         gcov -o . $(git ls-files :*.c :*.cc :*.cpp :*.C) || :
+         find . -type f -name '*.gcno' -exec gcov -pb {} +
 
         shell: bash
