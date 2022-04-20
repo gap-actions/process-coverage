@@ -11,8 +11,11 @@ runs:
          set -ex
          GAPROOT=${GAPROOT-$HOME/gap}
 
+         mkdir -p /tmp/gaproot/pkg/
+         ln -f -s $PWD /tmp/gaproot/pkg/
+
          # start GAP with custom GAP root, to ensure correct package version is loaded
-         GAP="$GAPROOT/bin/gap.sh -l $PWD/gaproot; --quitonbreak -q"
+         GAP="$GAPROOT/bin/gap.sh -l /tmp/gaproot; --quitonbreak -q"
 
          # generate library coverage reports
          $GAP -q <<GAPInput
