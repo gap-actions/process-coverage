@@ -1,6 +1,10 @@
 # process-coverage V2
 
-This GitHub action uploads coverage data for GAP packages to codecov.
+This GitHub action prepares coverage data for GAP packages for upload
+to [Codecov](https://www.codecov.io/).
+
+Note that this does not perform the actual upload. For that we recommend using
+the [`codecov/codecov-action`](https://github.com/codecov/codecov-action) action.
 
 ## Usage
 
@@ -31,7 +35,8 @@ jobs:
       - uses: gap-actions/setup-gap@v2
       - uses: gap-actions/build-pkg@v1
       - uses: gap-actions/run-pkg-tests@v2
-      - uses: gap-actions/process-coverage@v1
+      - uses: gap-actions/process-coverage@v2
+      - uses: codecov/codecov-action@v5
 ```
 
 ## Contact
