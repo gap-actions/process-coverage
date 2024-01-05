@@ -15,7 +15,7 @@ runs:
          ln -f -s $PWD /tmp/gaproot/pkg/
 
          # start GAP with custom GAP root, to ensure correct package version is loaded
-         GAP="$GAPROOT/bin/gap.sh -l /tmp/gaproot; --quitonbreak -q"
+         GAP="$GAPROOT/gap -l /tmp/gaproot; --quitonbreak -q"
 
          # generate library coverage reports
          $GAP -q <<GAPInput
