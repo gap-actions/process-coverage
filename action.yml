@@ -24,7 +24,12 @@ runs:
          fi;
          d := Directory("${COVDIR-coverage}");
          covs := [];
-         for f in DirectoryContents(d) do
+         files := DirectoryContents(d);
+         if files = fail then
+            Print("no coverage data found\n");
+            QUIT_GAP(0);
+         fi;
+         for f in files do
              if f in [".", ".."] then continue; fi;
              Add(covs, Filename(d, f));
          od;
