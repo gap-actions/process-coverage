@@ -38,7 +38,6 @@ runs:
          QUIT_GAP(0);
          GAPInput
 
-         # generate source coverage reports by running gcov
+      - name: "generate source coverage reports by running gcov"
+        run: |
          find . -type f -name '*.gcno' -exec gcov -pb {} +
-
-        shell: bash
