@@ -27,5 +27,5 @@ jobs:
           path: this-action/
       - uses: gap-actions/setup-gap@v2
       - uses: gap-actions/build-pkg@v1
-      - uses: gap-actions/run-pkg-tests@v2
+      - uses: gap-actions/run-pkg-tests@v3
       - uses: ./this-action/
