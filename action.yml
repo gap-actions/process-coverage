@@ -23,18 +23,18 @@ runs:
              Print("ERROR: could not load profiling package");
              FORCE_QUIT_GAP(1);
          fi;
-         d := Directory("${COVDIR-coverage}");;
-         covs := [];;
+         d := Directory("${COVDIR-coverage}");
+         covs := [];
          for f in DirectoryContents(d) do
              if f in [".", ".."] then continue; fi;
              Add(covs, Filename(d, f));
          od;
          Print("Merging coverage results from ", covs, "\n");
-         r := MergeLineByLineProfiles(covs);;
+         r := MergeLineByLineProfiles(covs);
          # filtered out unwanted other packages to avoid bad coverage interaction
-         r.line_info := Filtered(r.line_info, x -> not StartsWith( x[1], "$GAPROOT/" ) );;
+         r.line_info := Filtered(r.line_info, x -> not StartsWith( x[1], "$GAPROOT/" ) );
          Print("Outputting JSON\n");
-         OutputJsonCoverage(r, "gap-coverage.json");;
+         OutputJsonCoverage(r, "gap-coverage.json");
          QUIT_GAP(0);
          GAPInput
 
