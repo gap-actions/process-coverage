@@ -1,7 +1,5 @@
 name: 'Process coverage data'
 description: 'Process coverage data'
-env:
-  CHERE_INVOKING: 1
 
 runs:
   using: "composite"
