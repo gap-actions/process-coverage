@@ -7,6 +7,7 @@ runs:
   using: "composite"
   steps:
       - name: "Process coverage data"
+        shell: bash
         run: |
          set -ex
          GAPROOT=${GAPROOT-$HOME/gap}
@@ -39,5 +40,6 @@ runs:
          GAPInput
 
       - name: "generate source coverage reports by running gcov"
+        shell: bash
         run: |
          find . -type f -name '*.gcno' -exec gcov -pb {} +
