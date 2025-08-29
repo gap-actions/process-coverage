@@ -1,12 +1,11 @@
 name: 'Process coverage data'
 description: 'Process coverage data'
-env:
-  CHERE_INVOKING: 1
 
 runs:
   using: "composite"
   steps:
       - name: "Process coverage data"
+        shell: bash
         run: |
          set -ex
          GAPROOT=${GAPROOT-$HOME/gap}
@@ -39,5 +38,6 @@ runs:
          GAPInput
 
       - name: "generate source coverage reports by running gcov"
+        shell: bash
         run: |
          find . -type f -name '*.gcno' -exec gcov -pb {} +
