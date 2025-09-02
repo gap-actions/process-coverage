@@ -22,7 +22,7 @@ runs:
              Print("ERROR: could not load profiling package");
              FORCE_QUIT_GAP(1);
          fi;
-         d := Directory("${COVDIR-coverage}");
+         d := Directory("coverage");
          covs := [];
          files := DirectoryContents(d);
          if files = fail then
