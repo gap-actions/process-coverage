@@ -4,6 +4,31 @@ description: 'Process coverage data'
 runs:
   using: "composite"
   steps:
+      - name: "Build io and profiling packages if necessary"
+        shell: bash
+        run: |
+         set -ex
+         GAPROOT=${GAPROOT-$HOME/gap}
+
+         # the following somewhat awkward `cd` invocation ensures
+         # compatibility with both GAP <= 4.11 (with package dir names like
+         # `pkg/io-1.2.3`) and GAP >= 4.12 (where it is `pkg/io`)
+         cd $GAPROOT/pkg/io || cd $GAPROOT/pkg/io-*
+         if [[ ! -f config.status ]] ; then
+           ./configure --with-gaproot=$GAPROOT
+         fi
+         make -j$(nproc)
+
+         cd $GAPROOT/pkg/profiling || cd $GAPROOT/pkg/profiling-*
+         if [[ ! -f Makefile ]] ; then
+           if [[ -f configure.ac ]] ; then
+             ./configure --with-gaproot=$GAPROOT
+           else
+             ./configure $GAPROOT
+           fi
+         fi
+         make -j$(nproc)
+
       - name: "Process coverage data"
         shell: bash
         run: |
