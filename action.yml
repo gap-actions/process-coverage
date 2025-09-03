@@ -12,7 +12,7 @@ runs:
 
          # the following somewhat awkward `cd` invocation ensures
          # compatibility with both GAP <= 4.11 (with package dir names like
-         # `pkg/io-1.2.3`) and GAP >= 4.12 (where it is `pkg/ii`)
+         # `pkg/io-1.2.3`) and GAP >= 4.12 (where it is `pkg/io`)
          cd $GAPROOT/pkg/io || cd $GAPROOT/pkg/io-*
          if [[ ! -f config.status ]] ; then
            ./configure --with-gaproot=$GAPROOT
