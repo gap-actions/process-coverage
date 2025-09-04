@@ -1,4 +1,4 @@
-# process-coverage V2
+# process-coverage
 
 This GitHub action prepares coverage data for GAP packages for upload
 to [Codecov](https://www.codecov.io/).
@@ -12,6 +12,10 @@ The action `process-coverage` has to be called by the workflow of a GAP
 package.
 By default it processes the coverage data gathered during the action
 [gap-actions/run-test-for-packages](https://github.com/gap-actions/run-pkg-tests).
+
+### What's new in v3
+
+This action now requires `gap-actions/setup-gap@v3`.
 
 ### Example
 
@@ -32,10 +36,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-      - uses: gap-actions/setup-gap@v2
+      - uses: gap-actions/setup-gap@v3
       - uses: gap-actions/build-pkg@v1
       - uses: gap-actions/run-pkg-tests@v2
-      - uses: gap-actions/process-coverage@v2
+      - uses: gap-actions/process-coverage@v3
       - uses: codecov/codecov-action@v5
 ```
 
