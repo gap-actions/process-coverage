@@ -12,7 +12,7 @@ env:
 
 jobs:
   test:
-    name: ${{ matrix.gap-branch }}
+    name: ${{ matrix.gap-version }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
