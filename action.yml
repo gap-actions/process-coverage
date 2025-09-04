@@ -7,9 +7,6 @@ runs:
       - name: "Build io and profiling packages if necessary"
         shell: bash
         run: |
-         set -ex
-         GAPROOT=${GAPROOT-$HOME/gap}
-
          # the following somewhat awkward `cd` invocation ensures
          # compatibility with both GAP <= 4.11 (with package dir names like
          # `pkg/io-1.2.3`) and GAP >= 4.12 (where it is `pkg/io`)
@@ -32,15 +29,6 @@ runs:
       - name: "Process coverage data"
         shell: bash
         run: |
-         set -ex
-         GAPROOT=${GAPROOT-$HOME/gap}
-
-         mkdir -p /tmp/gaproot/pkg/
-         ln -f -s $PWD /tmp/gaproot/pkg/
-
-         # start GAP with custom GAP root, to ensure correct package version is loaded
-         GAP="$GAPROOT/gap -l /tmp/gaproot; --quitonbreak -q"
-
          # generate library coverage reports
          $GAP -q <<GAPInput
          if LoadPackage("profiling") <> true then
