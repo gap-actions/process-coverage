@@ -37,5 +37,5 @@ jobs:
         with:
           gap-version: ${{ matrix.gap-version }}
       - uses: gap-actions/build-pkg@v2
-      - uses: gap-actions/run-pkg-tests@v3
+      - uses: gap-actions/run-pkg-tests@v4
       - uses: ./this-action/
